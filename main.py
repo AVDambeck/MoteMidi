@@ -1,3 +1,4 @@
+#!python3
 print("this is a first draft. Midi off has not been sent. Only play terminal sounds or have a midi panic ready")
 
 #import
@@ -32,14 +33,14 @@ class Input(object):
         #midi - play slef.note
         if self.type == 1:
             #if the pressure isnt 0 play note
-            if val = 1:
+            if val == 1:
                 print(self.message + str(val))
                 note_on = [0x90, self.note, 64]
                 midiout.send_message(note_on)
             else:
                 pass
         elif self.type == 2:
-            if
+            print(self.message + str(val))
 
         else:
             print(self.message + str(val))

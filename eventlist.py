@@ -1,4 +1,4 @@
-#Command line tool to list events
+#Python function that lists devices
 from evdev import InputDevice, categorize, ecodes
 import os
 
@@ -20,16 +20,18 @@ def getGamepad(test):
     else:
         print(dev)
 
-#get highest event
-for i in os.listdir("/dev/input"):
-    if "event" in i:
-      max = int(i.replace("event", ""))
-      break
+def list():
+    #get highest event
+    for i in os.listdir("/dev/input"):
+        if "event" in i:
+          max = int(i.replace("event", ""))
+          break
 
-#list events
-for i in range(1,max):
-    getGamepad(i)
+    #list events
+    for i in range(1,max):
+        getGamepad(i)
+
 
 #exit
-del dev
-exit()
+#del dev
+#exit()

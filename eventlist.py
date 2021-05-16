@@ -1,10 +1,9 @@
-#!python3
 #Python function that lists devices
 from evdev import InputDevice, categorize, ecodes
 import os
 
 dev = ""
-longPrompt = True
+longPrompt = False
 
 #gamepad function
 def getGamepad(test):

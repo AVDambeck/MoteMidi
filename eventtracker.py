@@ -1,4 +1,3 @@
-#!python3
 #import
 from evdev import InputDevice, categorize, ecodes
 import sys, os

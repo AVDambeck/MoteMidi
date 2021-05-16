@@ -57,13 +57,15 @@ def getGamepad(test):
 
 #define class for each physical button
 class Control(object):
-    def __init__(self, code, type, message="debug", note="1", velInfo=[defaultSteps, defaultMin, defaultMax, defaultMode]):
+    def __init__(self, code, type, message="debug", note="1", channel=1, velInfo=[defaultSteps, defaultMin, defaultMax, defaultMode]):
         #type 0 = dummy, 1 = midi, 2 = controls
         self.code = code
         self.type = type
         self.message = message
         self.note = note
+        self.channel  = channel
         self.velInfo = velInfo
+
         self.oldVel = 0
 
     #input.payload is intended to be run when the button is pressed. depends on button type
@@ -85,13 +87,17 @@ class Control(object):
                 velocity = vel.trunc(velocity, velAbsMin, velAbsMax)
 
                 print(self.message + str(val) + " - " + str(velocity))
-                note_on = [0x90, self.note, velocity]
+                note_on = [(143+self.channel), self.note, velocity]
                 midiout.send_message(note_on)
                 self.oldVel = velocity
             else:
                 pass
         elif self.type == 2:
+            #analog stick
             pass
+        elif self.type == 3:
+            #digital buttons
+            print(self.message)
 
         else:
             print(self.message + str(val))
@@ -101,16 +107,21 @@ class Control(object):
 
 lightCurve = [defaultSteps, 40, 200, defaultMode]
 
-PadGreen = Control(18, 1, "green", 45, lightCurve)
-PadBlue = Control(17, 1, "blue", 40, lightCurve)
-PadRed = Control(16, 1, "red", 38, lightCurve)
-PadYellow = Control(20, 1, "yello", 42)
-PadOrange = Control(21, 1, "orange", 61)
-Pedal = Control(22, 1, "pedal", 36, lightCurve)
+#name = Control(device code, 1 (midi mode), "message", midi note, midi channe, velocity curve info)
+PadRed = Control(16, 1, "red", 38, 1, lightCurve)
+PadBlue = Control(17, 1, "blue", 40, 1, lightCurve)
+PadGreen = Control(18, 1, "green", 45, 1, lightCurve)
+PadYellow = Control(20, 1, "yello", 42, 1)
+PadOrange = Control(21, 1, "orange", 61, 1)
+Pedal = Control(22, 1, "pedal", 36, 1, lightCurve)
+
 StickX = Control(0, 2, "StickX", 1)
 StickY = Control(1, 2, "StickY", 2)
 
-lsControl = [PadGreen, PadBlue, PadRed, PadYellow, PadOrange, StickX, StickY, Pedal]
+Minus = Control(314, 3, "Minus Button", 1)
+Plus = Control(315, 3, "Plus Button", 2)
+
+lsControl = [PadGreen, PadBlue, PadRed, PadYellow, PadOrange, Pedal, StickX, StickY, Minus, Plus]
 
 
 

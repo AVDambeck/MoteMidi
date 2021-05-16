@@ -1,3 +1,4 @@
+#!python3
 #Python function that lists devices
 from evdev import InputDevice, categorize, ecodes
 import os

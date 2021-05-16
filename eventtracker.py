@@ -49,7 +49,8 @@ while run == True:
         getGamepad(num)
 
 
-
+print(dev.capabilities(verbose=True))
+print('#' * 80)
 
 for event in dev.read_loop():
     print(categorize(event))

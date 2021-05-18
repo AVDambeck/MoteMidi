@@ -29,8 +29,14 @@ def list():
           break
 
     #list events
-    for i in range(1,max):
+    for i in range(1,max+1):
         getGamepad(i)
+
+
+if __name__ == "__main__":
+    list()
+    del dev
+    quit()
 
 
 #exit

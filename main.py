@@ -1,5 +1,4 @@
 #!python3
-print("this is a first draft. Midi off has not been sent. Only play terminal sounds or have a midi panic ready")
 
 #import
 import evdev, rtmidi, time, random, asyncio
